@@ -1,4 +1,4 @@
-# Hi there 👋 I'm Kaike de Paula Domingues
+# Kaike de Paula Domingues
 
 <p align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=00D9FF&center=true&vCenter=true&width=700&lines=Full-Stack+Developer;C%23+%7C+VB.NET+%7C+TypeScript+%7C+Python;Building+clean+and+efficient+solutions" alt="Typing SVG" />
