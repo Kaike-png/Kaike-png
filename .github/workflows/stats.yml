@@ -1,0 +1,41 @@
+name: Update stats cards
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Para incluir repositórios privados, crie o secret STATS_TOKEN
+      # (PAT com escopos `repo` e `read:user`). Sem ele, só conta os públicos.
+      - name: Generate stats card
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: stats
+          options: username=Kaike-png&show_icons=true&count_private=true&include_all_commits=true&theme=tokyonight&hide_border=true
+          path: profile/stats.svg
+          token: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Generate top languages card
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: top-langs
+          options: username=Kaike-png&layout=compact&langs_count=8&theme=tokyonight&hide_border=true
+          path: profile/top-langs.svg
+          token: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Commit cards
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/*.svg
+          git commit -m "Update stats cards" || exit 0
+          git push
