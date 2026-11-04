@@ -24,13 +24,12 @@ jobs:
           path: profile/stats.svg
           token: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
 
+      # Card próprio: inclui forks escolhidos e ignora markup/bibliotecas.
+      # Ajuste as listas no topo de scripts/top_langs.py.
       - name: Generate top languages card
-        uses: stats-organization/github-readme-stats-action@v2
-        with:
-          card: top-langs
-          options: username=Kaike-png&layout=compact&langs_count=8&exclude_repo=Cafeteria-Serenatto,AluraBooks,Treinando_HTML-CSS,portifolio,DomynixERP&theme=tokyonight&hide_border=true
-          path: profile/top-langs.svg
-          token: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+        run: python3 scripts/top_langs.py
+        env:
+          GH_TOKEN: ${{ secrets.STATS_TOKEN }}
 
       - name: Commit cards
         run: |
