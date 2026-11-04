@@ -95,7 +95,8 @@ def collect(token):
         skip = IGNORE_LANGS | IGNORE_LANGS_PER_REPO.get(name, set())
         langs = api(f"/repos/{USER}/{name}/languages", token)
         used = {k: v for k, v in langs.items() if k not in skip}
-        print(f"{name}: " + ", ".join(f"{k}={v // 1024}K" for k, v in used.items()), file=sys.stderr)
+        if os.environ.get("VERBOSE"):  # logs do Actions são públicos: não expor repos privados
+            print(f"{name}: " + ", ".join(f"{k}={v // 1024}K" for k, v in used.items()), file=sys.stderr)
         for lang, size in used.items():
             totals[lang] = totals.get(lang, 0) + size
     return totals
