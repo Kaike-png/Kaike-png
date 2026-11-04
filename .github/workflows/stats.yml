@@ -28,7 +28,7 @@ jobs:
         uses: stats-organization/github-readme-stats-action@v2
         with:
           card: top-langs
-          options: username=Kaike-png&layout=compact&langs_count=8&theme=tokyonight&hide_border=true
+          options: username=Kaike-png&layout=compact&langs_count=8&exclude_repo=Cafeteria-Serenatto,AluraBooks,Treinando_HTML-CSS,portifolio&theme=tokyonight&hide_border=true
           path: profile/top-langs.svg
           token: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
 
